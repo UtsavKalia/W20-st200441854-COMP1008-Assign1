@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane fx:id="Second" prefHeight="400.0" prefWidth="600.0" stylesheets="@stylesheet1.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="HobbiesController">
+   <children>
+      <Label contentDisplay="CENTER" layoutX="146.0" layoutY="14.0" prefHeight="87.0" prefWidth="271.0" text="Select List of Activities">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Label>
+      <VBox layoutX="139.0" layoutY="117.0" prefHeight="238.0" prefWidth="279.0" spacing="15.0">
+         <children>
+            <CheckBox fx:id="photography" mnemonicParsing="false" onAction="#checkPhotography" text="Photography">
+               <font>
+                  <Font size="14.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="camping" mnemonicParsing="false" onAction="#checkCamping" text="Camping">
+               <font>
+                  <Font size="14.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="painting" mnemonicParsing="false" onAction="#checkPainting" text="Painting">
+               <font>
+                  <Font size="14.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="running" mnemonicParsing="false" onAction="#checkRunning" text="Running">
+               <font>
+                  <Font size="14.0" />
+               </font></CheckBox>
+            <CheckBox fx:id="hiking" mnemonicParsing="false" onAction="#checkHiking" text="Hiking">
+               <font>
+                  <Font size="14.0" />
+               </font></CheckBox>
+            <Button fx:id="update" mnemonicParsing="false" onAction="#update" text="Update" />
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
