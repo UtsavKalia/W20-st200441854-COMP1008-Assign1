@@ -1,28 +1,57 @@
+import javafx.embed.swing.SwingFXUtils;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 
 public class StudentCardController implements Initializable {
+    @FXML private Button listOfActivitiesPage;
     @FXML private AnchorPane anchor;
     @FXML private TextArea listActivities;
     @FXML private Label firstName;
     @FXML private Label lastName;
     @FXML private Label studentNumber;
     @FXML private ImageView imageView;
-    private List<String> activityList;
+    private Student getStudent;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+        try {
+            File imageFile = new File("./src/Image/defaultPerson.png");
+            BufferedImage bufferedImage = ImageIO.read(imageFile);
+            Image image = SwingFXUtils.toFXImage(bufferedImage, null);
+            imageView.setImage(image);
+        }
+        catch (IOException e){
+            System.out.println(e.getMessage());
+        }
+    }
+
+    public void intData(Student student){
+        getStudent = student;
+        firstName.setText(String.format("First Name : %10s", getStudent.getFirstName()));
+        lastName.setText(String.format("Last Name : %10s", getStudent.getLastName()));
+        studentNumber.setText(String.format("Student#%10d", getStudent.getStudentNumber()));
+        listActivities.setText(String.format("%s",getStudent.getFavActivitiesString()));
+        String imageLocation = "./Image/utsav.JPG";
+        getStudent.setImage(new Image(imageLocation));
+        imageView.setImage(getStudent.getImage());
+    }
 
     /**
      * @param actionEvent- when list of activities button is pressed it will help
@@ -34,33 +63,9 @@ public class StudentCardController implements Initializable {
         Parent activitiesView = loader.load();
         Scene activitiesScene = new Scene(activitiesView);
         HobbiesController controller = loader.getController();
-        controller.checkData(activityList);
+        controller.intData(getStudent);
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(activitiesScene);
         window.show();
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        String imageLocation = "./Image/utsav.JPG";
-        Student utsav = new Student("utsav", "kalia", 200441854, "running", new Image(imageLocation));
-        activityList = utsav.listOfActivities();
-        imageView.setImage(utsav.getStudentImage());
-        firstName.setText(String.format("First Name : %10s", utsav.getFirstName()));
-        lastName.setText(String.format("Last Name : %10s", utsav.getLastName()));
-        studentNumber.setText(String.format("Student#%d", utsav.getStudentNumber()));
-         for (String element : activityList){
-           listActivities.appendText(element+"\n");
-        }
-    }
-
-    /**
-     * @param listItems-this method will help to get connect two controllers and update listActivities text field
-     */
-    public void listView(List<String> listItems){
-        String textAreaString = "";
-        for (Object item:listItems){
-            textAreaString += String.format("%s%n",(String) item);
-        }
-        this.listActivities.setText(textAreaString);
-        }
 }

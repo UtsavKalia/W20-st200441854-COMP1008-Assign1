@@ -8,24 +8,29 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchor" prefHeight="410.0" prefWidth="541.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StudentCardController">
+<AnchorPane fx:id="anchor" prefHeight="394.0" prefWidth="470.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StudentCardController">
    <children>
       <HBox layoutX="12.0" layoutY="14.0" prefHeight="380.0" prefWidth="515.0" spacing="10.0">
          <children>
-            <ImageView id="imageView" fx:id="imageView" fitHeight="196.0" fitWidth="190.0" pickOnBounds="true" preserveRatio="true" styleClass="Image_View">
-               <effect>
-                  <DropShadow height="42.45" radius="26.0875" width="63.9">
-                     <color>
-                        <Color opacity="0.6885812878608704" />
-                     </color>
-                  </DropShadow>
-               </effect>
-               <HBox.margin>
-                  <Insets bottom="2.0" left="2.0" right="2.0" top="2.0" />
-               </HBox.margin>
-               <viewport>
-                  <Rectangle2D />
-               </viewport></ImageView>
+            <VBox alignment="TOP_RIGHT" prefHeight="200.0" prefWidth="100.0" spacing="20.0">
+               <children>
+                  <ImageView id="imageView" fx:id="imageView" fitHeight="155.0" fitWidth="137.0" pickOnBounds="true" preserveRatio="true" styleClass="Image_View">
+                     <effect>
+                        <DropShadow height="53.18" radius="50.815000000000005" width="152.08">
+                           <color>
+                              <Color red="0.2342105209827423" green="0.186934694647789" blue="0.186934694647789" opacity="0.9399999976158142" />
+                           </color>
+                        </DropShadow>
+                     </effect>
+                     <viewport>
+                        <Rectangle2D />
+                     </viewport>
+                  </ImageView>
+                  <Label prefHeight="35.0" prefWidth="126.0" text="List of Activities:" />
+               </children>
+               <padding>
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+               </padding></VBox>
             <VBox prefHeight="371.0" prefWidth="347.0" spacing="45.0">
                <children>
                   <Label fx:id="firstName" alignment="CENTER" text="First Name:">
@@ -43,8 +48,8 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
-                  <TextArea fx:id="listActivities" maxWidth="300.0" minWidth="300.0" prefHeight="90.0" prefWidth="300.0" />
-                  <Button mnemonicParsing="false" onAction="#listOfActivitiesPage" text="Go to list of Activities" />
+                  <TextArea fx:id="listActivities" maxWidth="300.0" minWidth="210.0" prefHeight="81.0" prefWidth="300.0" />
+                  <Button fx:id="listOfActivitiesPage" mnemonicParsing="false" onAction="#listOfActivitiesPage" text="Go to list of Activities" />
                </children>
             </VBox>
          </children>

@@ -11,30 +11,58 @@
             <Font size="36.0" />
          </font>
       </Label>
-      <VBox layoutX="139.0" layoutY="117.0" prefHeight="238.0" prefWidth="279.0" spacing="15.0">
+      <Button fx:id="updateActivities" layoutX="151.0" layoutY="345.0" mnemonicParsing="false" onAction="#setUpdateActivities" text="Update" />
+      <HBox layoutX="111.0" layoutY="87.0" prefHeight="206.0" prefWidth="340.0">
          <children>
-            <CheckBox fx:id="photography" mnemonicParsing="false" onAction="#checkPhotography" text="Photography">
-               <font>
-                  <Font size="14.0" />
-               </font></CheckBox>
-            <CheckBox fx:id="camping" mnemonicParsing="false" onAction="#checkCamping" text="Camping">
-               <font>
-                  <Font size="14.0" />
-               </font></CheckBox>
-            <CheckBox fx:id="painting" mnemonicParsing="false" onAction="#checkPainting" text="Painting">
-               <font>
-                  <Font size="14.0" />
-               </font></CheckBox>
-            <CheckBox fx:id="running" mnemonicParsing="false" onAction="#checkRunning" text="Running">
-               <font>
-                  <Font size="14.0" />
-               </font></CheckBox>
-            <CheckBox fx:id="hiking" mnemonicParsing="false" onAction="#checkHiking" text="Hiking">
-               <font>
-                  <Font size="14.0" />
-               </font></CheckBox>
-            <Button fx:id="update" mnemonicParsing="false" onAction="#update" text="Update" />
+            <VBox prefHeight="126.0" prefWidth="156.0" spacing="25.0">
+               <children>
+                  <CheckBox fx:id="exercise" mnemonicParsing="false" text="Exercise">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="sleeping" mnemonicParsing="false" text="Sleeping">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="sports" mnemonicParsing="false" text="Sports">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="music" mnemonicParsing="false" text="Music">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </VBox>
+            <VBox prefHeight="200.0" prefWidth="139.0" spacing="25.0">
+               <children>
+                  <CheckBox fx:id="reading" mnemonicParsing="false" text="Reading">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="watchingTV" mnemonicParsing="false" text="WatchingTV">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="familyTime" mnemonicParsing="false" text="FamilyTime">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+                  <CheckBox fx:id="fishing" mnemonicParsing="false" text="Fishing">
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </CheckBox>
+               </children>
+            </VBox>
          </children>
-      </VBox>
+      </HBox>
    </children>
 </AnchorPane>
