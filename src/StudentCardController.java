@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -20,6 +21,8 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class StudentCardController implements Initializable {
+    @FXML private ListView listOfStudents;
+    @FXML private Label birthday;
     @FXML private Button listOfActivitiesPage;
     @FXML private AnchorPane anchor;
     @FXML private TextArea listActivities;
@@ -28,6 +31,7 @@ public class StudentCardController implements Initializable {
     @FXML private Label studentNumber;
     @FXML private ImageView imageView;
     private Student getStudent;
+
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -46,18 +50,20 @@ public class StudentCardController implements Initializable {
         getStudent = student;
         firstName.setText(String.format("First Name : %10s", getStudent.getFirstName()));
         lastName.setText(String.format("Last Name : %10s", getStudent.getLastName()));
-        studentNumber.setText(String.format("Student#%10d", getStudent.getStudentNumber()));
+        studentNumber.setText(String.format("Student#%10d", Student.getStudentNumber()));
         listActivities.setText(String.format("%s",getStudent.getFavActivitiesString()));
-        String imageLocation = "./Image/utsav.JPG";
-        getStudent.setImage(new Image(imageLocation));
+        birthday.setText("birthday: "+getStudent.getBirthday()+", age: "+getStudent.age());
+        //String imageLocation = "./Image/utsav.JPG";
+       // getStudent.setImage(new Image(imageLocation));
         imageView.setImage(getStudent.getImage());
+
     }
 
     /**
      * @param actionEvent- when list of activities button is pressed it will help
      *                   to go to second controller named Hobbies.fxml
      */
-    public void listOfActivitiesPage(javafx.event.ActionEvent actionEvent) throws IOException {
+   /** public void listOfActivitiesPage(javafx.event.ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(getClass().getResource("Hobbies.fxml"));
         Parent activitiesView = loader.load();
@@ -68,4 +74,16 @@ public class StudentCardController implements Initializable {
         window.setScene(activitiesScene);
         window.show();
     }
+    */
+
+   public void listOfActivitiesPage(javafx.event.ActionEvent actionEvent) throws IOException {
+       FXMLLoader loader = new FXMLLoader();
+       loader.setLocation(getClass().getResource("NewStudentView.fxml"));
+       Parent activitiesView = loader.load();
+
+       Scene activitiesScene = new Scene(activitiesView);
+       Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
+       window.setScene(activitiesScene);
+       window.show();
+   }
 }

@@ -1,23 +1,28 @@
-  import javafx.scene.image.Image;
-  import java.util.ArrayList;
-    /*
-    * Firstly we are going to create instance variables for student class
-    */
- public class Student {
+import javafx.scene.image.Image;
+import java.time.LocalDate;
+import java.time.Period;
+import java.util.ArrayList;
+
+/*
+ * Firstly we are going to create instance variables for student class
+ */
+public class Student {
     private String firstName, lastName;
-    private int studentNumber;
+    private static int studentNumber = 100000000;
     private Image image;
     private ArrayList<String> favouriteActivities;
-
+    private LocalDate birthday;
     /**
      *  constructor will create the object in the system
      */
-    public Student(String firstName, String lastName, int studentNumber) {
+    public Student(String firstName, String lastName) {
         setFirstName(firstName);
         setLastName(lastName);
-        setStudentNumber(studentNumber);
+        studentNumber++;
         favouriteActivities = new ArrayList<>();
         setImage(image);
+        setBirthday(birthday);
+
     }
 
     public String getFirstName() {
@@ -54,8 +59,18 @@
             throw new IllegalArgumentException("last name must be greater than 2 character");
     }
 
-    public int getStudentNumber() {
+    public static int getStudentNumber() {
         return studentNumber;
+    }
+    public void setBirthday(LocalDate birthday){
+            this.birthday = birthday;
+    }
+    public String getBirthday(){
+        return birthday.toString();
+    }
+
+    public String age(){
+        return String.valueOf(Period.between(birthday, LocalDate.now()).getYears());
     }
 
     /**
@@ -64,7 +79,7 @@
      */
     public void setStudentNumber(int studentNumber) {
         if (Integer.toString(studentNumber).length() == 9) {
-            this.studentNumber = studentNumber;
+            Student.studentNumber = studentNumber;
         }
         else
             throw new IllegalArgumentException("student number length must be 9 ");
@@ -78,18 +93,18 @@
             favouriteActivities.add(activity);
         else
             throw new IllegalArgumentException("activities cannot be empty");
-        }
+    }
 
     public ArrayList<String> getFavouriteActivities() {
-            return favouriteActivities;
-        }
+        return favouriteActivities;
+    }
 
     public String getFavActivitiesString(){
         StringBuilder sb = new StringBuilder();
         for (String activity: favouriteActivities)
             sb.append(String.format("%s%n",activity));
         return sb.toString();
-        }
+    }
 
     public Image getImage() {
         return image;
@@ -103,6 +118,6 @@
      * @return- this method will help to use Student object in console using toString method
      */
     public String toString(){
-        return String.format("%s %s, student# %d %nfav activity: %n%s",firstName,lastName,studentNumber,getFavActivitiesString());
+        return String.format("%s %s, student# %d age %s %nfav activity: %n%s",firstName,lastName,studentNumber,age(),getFavActivitiesString());
     }
 }
