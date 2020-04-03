@@ -102,7 +102,7 @@ public class HobbiesController implements Initializable {
     }
     /**
      * @param actionEvent-when update button is pressed this method will transfer us two scene that
-     *                         is connected to StudentCard.fxml and help o transfer some data
+     *                         is connected to StudentCard.fxml and help o transfer some data.
      */
     public void setUpdateActivities(javafx.event.ActionEvent actionEvent) throws IOException {
         addHobbies();

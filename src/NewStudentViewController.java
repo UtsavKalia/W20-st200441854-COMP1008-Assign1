@@ -189,7 +189,7 @@ public class NewStudentViewController implements Initializable {
 
     /**
      * @param event this method will help to set initial values required by student object
-     *              when loadDefaultButton is clicked
+     *              when loadDefaultButton is clicked.
      */
     public void loadDefaultStudent(ActionEvent event) {
         firstName.setText("Utsav");

@@ -92,7 +92,7 @@ public class Student {
     }
 
     /**
-     * @return- this method will calculate current age of user and return it  as a string
+     * @return- this method will calculate current age of user and return it  as a string.
      */
     public String getAge(){
         return String.valueOf(Period.between(birthday, LocalDate.now()).getYears());

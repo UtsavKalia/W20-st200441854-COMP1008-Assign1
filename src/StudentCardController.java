@@ -48,7 +48,7 @@ public class StudentCardController implements Initializable {
 
     /**
      * @param actionEvent- when list of activities button is pressed it will help
-     *                   to go to second controller named Hobbies.fxml
+     *                   to go to second controller named Hobbies.fxml.
      */
    /** public void listOfActivitiesPage(javafx.event.ActionEvent actionEvent) throws IOException {
         FXMLLoader loader = new FXMLLoader();
