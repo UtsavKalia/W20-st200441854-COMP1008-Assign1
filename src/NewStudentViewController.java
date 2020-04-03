@@ -39,6 +39,10 @@ public class NewStudentViewController implements Initializable {
     @FXML private DatePicker birthday;
     private Student newStudent;
 
+    /**
+     *this will set initial image and set some labels values null and
+     * helps to set button viewStudent invisible
+     */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         studentNumber.setEditable(false);
@@ -54,7 +58,6 @@ public class NewStudentViewController implements Initializable {
         errorDisplay.setText("");
         ageLabel.setText("");
         viewStudent.setVisible(false);
-       // Student.getStudentNumber();
         studentNumber.setText(String.valueOf(Student.getStudentNumber()));
     }
 
@@ -65,8 +68,7 @@ public class NewStudentViewController implements Initializable {
     public void submit(ActionEvent actionEvent) {
         if(checkFields()) {
             try {
-                newStudent = new Student(firstName.getText(), lastName.getText());
-                newStudent.setStudentNumber((Student.getStudentNumber()));
+                newStudent = new Student(firstName.getText(), lastName.getText(),birthday.getValue(),selectImage.getImage());
                 newStudent.setBirthday(birthday.getValue());
                 activities();
                 viewStudent.setVisible(true);
@@ -77,9 +79,13 @@ public class NewStudentViewController implements Initializable {
         }
     }
 
+    /**
+     * @param event- when user does an action on datePicker this method will help to set age
+     */
     public void showBirthday(ActionEvent event) {
-            ageLabel.setText(" age: " + String.valueOf(Period.between(birthday.getValue(), LocalDate.now()).getYears()));
+            ageLabel.setText(" age: " + Period.between(birthday.getValue(), LocalDate.now()).getYears());
     }
+
     /**
      * this method will make sure that text fields or required fields are not left by user
      * @return
@@ -95,9 +101,9 @@ public class NewStudentViewController implements Initializable {
             else
                 message = "First name and Last name are required";
         }
-        if (studentNumber.getText().isEmpty()){
+        if (birthday.getValue() == null){
             if (message.isEmpty())
-                message = "Student Number is required";
+                message = "please select your birthday";
             else if (firstName.getText().isEmpty()&& !lastName.getText().isEmpty())
                 message = "First name and Student number required";
             else if (!firstName.getText().isEmpty() && lastName.getText().isEmpty())
@@ -108,14 +114,17 @@ public class NewStudentViewController implements Initializable {
         errorDisplay.setText(message);
         return message.equals("");
     }
+
+    /**
+     *this method will help to set image in imageView by helping to go to folder and filter images in png and jpg
+     */
     public void selectedImageButtonPushed(ActionEvent event) throws IOException {
         // get the Stage to open a new window
         Stage stage = (Stage)((Node)event.getSource()).getScene().getWindow();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("open Image");
         //filter for .jpg and .png
-        FileChooser.ExtensionFilter imageFilter =
-                new FileChooser.ExtensionFilter("Image Files","*.jpg","*.png");
+        FileChooser.ExtensionFilter imageFilter = new FileChooser.ExtensionFilter("Image Files","*.jpg","*.png");
         fileChooser.getExtensionFilters().add(imageFilter);
         // set the start directory
         String userDirectoryString = System.getProperty("user.home")+"\\Pictures";
@@ -123,16 +132,12 @@ public class NewStudentViewController implements Initializable {
         // confirm that system can reach the directory
         if (!userDirectory.canRead())
             userDirectory = new File(System.getProperty("user.home"));
-        //set the file chooser to select intital directory
+        //set the file chooser to select initial directory
         fileChooser.setInitialDirectory(userDirectory);
         File imageFile = fileChooser.showOpenDialog(stage);
         if (imageFile != null && imageFile.isFile())
         {
             selectImage.setImage(new Image(imageFile.toURI().toString()));
-        //    System.out.println(imageFile);
-        //    String imageLoction = imageFile.toString();
-        //    BufferedImage image = ImageIO.read(imageFile);
-        //     newStudent.setImage(new Image(String.valueOf(image)));
         }
     }
 
@@ -178,6 +183,20 @@ public class NewStudentViewController implements Initializable {
         controller.intData(newStudent);
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(activitiesScene);
+        window.setTitle("View Student");
         window.show();
+    }
+
+    /**
+     * @param event this method will help to set initial values required by student object
+     *              when loadDefaultButton is clicked
+     */
+    public void loadDefaultStudent(ActionEvent event) {
+        firstName.setText("Utsav");
+        lastName.setText("Kalia");
+        birthday.setValue(LocalDate.of(2001,1,1));
+        music.setSelected(true);
+        sports.setSelected(true);
+        exercise.setSelected(true);
     }
 }

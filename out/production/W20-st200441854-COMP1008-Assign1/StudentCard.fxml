@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane fx:id="anchor" prefHeight="394.0" prefWidth="470.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StudentCardController">
+<AnchorPane prefHeight="505.0" prefWidth="527.0" stylesheets="@stylesheet.css" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="StudentCardController">
    <children>
       <HBox layoutX="12.0" layoutY="14.0" prefHeight="380.0" prefWidth="515.0" spacing="10.0">
          <children>
@@ -31,7 +31,7 @@
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding></VBox>
-            <VBox prefHeight="371.0" prefWidth="347.0" spacing="45.0">
+            <VBox prefHeight="371.0" prefWidth="347.0" spacing="30.0">
                <children>
                   <Label fx:id="firstName" alignment="CENTER" text="First Name:">
                      <font>
@@ -48,12 +48,14 @@
                         <Font size="18.0" />
                      </font>
                   </Label>
+                  <Label fx:id="birthday" text="Label" />
                   <TextArea fx:id="listActivities" maxWidth="300.0" minWidth="210.0" prefHeight="81.0" prefWidth="300.0" />
-                  <Button fx:id="listOfActivitiesPage" mnemonicParsing="false" onAction="#listOfActivitiesPage" text="Go to list of Activities" />
+                  <Button mnemonicParsing="false" onAction="#listOfActivitiesPage" text="Create New Student" />
                </children>
             </VBox>
          </children>
       </HBox>
+      <ListView fx:id="listOfStudents" layoutX="9.0" layoutY="395.0" prefHeight="96.0" prefWidth="508.0" />
       
 
    </children>

@@ -103,7 +103,7 @@
                   <VBox prefHeight="152.0" prefWidth="193.0" spacing="30.0">
                      <children>
                         <Button mnemonicParsing="false" onAction="#selectedImageButtonPushed" prefHeight="30.0" prefWidth="192.0" text="Choose image" />
-                        <Button mnemonicParsing="false" prefHeight="30.0" prefWidth="190.0" text="Load Default Student" />
+                        <Button mnemonicParsing="false" onAction="#loadDefaultStudent" prefHeight="30.0" prefWidth="190.0" text="Load Default Student" />
                      </children>
                   </VBox>
                     </children>

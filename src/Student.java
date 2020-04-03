@@ -2,33 +2,30 @@ import javafx.scene.image.Image;
 import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
-
 /*
  * Firstly we are going to create instance variables for student class
- */
+*/
 public class Student {
     private String firstName, lastName;
-    private static int studentNumber = 100000000;
+    private static int studentNumber = 100000001;
+    private int newStudentNumber;
     private Image image;
     private ArrayList<String> favouriteActivities;
     private LocalDate birthday;
     /**
      *  constructor will create the object in the system
      */
-    public Student(String firstName, String lastName) {
+    public Student(String firstName, String lastName, LocalDate birthday, Image image) {
         setFirstName(firstName);
         setLastName(lastName);
-        studentNumber++;
+        newStudentNumber = setStudentNumber(studentNumber);
         favouriteActivities = new ArrayList<>();
         setImage(image);
         setBirthday(birthday);
-
     }
-
     public String getFirstName() {
         return firstName;
     }
-
     /**
      * @param firstName- this method will make sure that firstName is greater than 2 characters and if user
      *                 enter all letters in small it will convert 1st character to uppercase
@@ -62,27 +59,43 @@ public class Student {
     public static int getStudentNumber() {
         return studentNumber;
     }
-    public void setBirthday(LocalDate birthday){
-            this.birthday = birthday;
-    }
-    public String getBirthday(){
-        return birthday.toString();
-    }
-
-    public String age(){
-        return String.valueOf(Period.between(birthday, LocalDate.now()).getYears());
-    }
-
     /**
      * @param studentNumber-this method will make sure that student number contain 9 numbers otherwise
      *                     it will throw an illegal argument exception
+     * @return
      */
-    public void setStudentNumber(int studentNumber) {
+    private int setStudentNumber(int studentNumber) {
         if (Integer.toString(studentNumber).length() == 9) {
-            Student.studentNumber = studentNumber;
+            this.newStudentNumber = studentNumber;
+            studentNumber = Student.studentNumber++;
         }
         else
             throw new IllegalArgumentException("student number length must be 9 ");
+        return studentNumber;
+    }
+    public int getNewStudentNumber() {
+        return newStudentNumber;
+    }
+
+    public LocalDate getBirthday(){
+        return birthday;
+    }
+    /**
+     * @param birthday- this method will help user to set birthday if its difference with current year is between 10 to 120
+     */
+    public void setBirthday(LocalDate birthday){
+        if (Period.between(birthday, LocalDate.now()).getYears()>=10 && Period.between(birthday, LocalDate.now()).getYears()<120){
+            this.birthday = birthday;
+        }
+            else
+                throw new IllegalArgumentException("no");
+    }
+
+    /**
+     * @return- this method will calculate current age of user and return it  as a string
+     */
+    public String getAge(){
+        return String.valueOf(Period.between(birthday, LocalDate.now()).getYears());
     }
 
     /**
@@ -118,6 +131,6 @@ public class Student {
      * @return- this method will help to use Student object in console using toString method
      */
     public String toString(){
-        return String.format("%s %s, student# %d age %s %nfav activity: %n%s",firstName,lastName,studentNumber,age(),getFavActivitiesString());
+        return String.format("%s %s, student# %d",firstName,lastName,getNewStudentNumber());
     }
 }
