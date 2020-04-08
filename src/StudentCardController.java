@@ -10,6 +10,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 import java.io.IOException;
 import java.net.URL;
@@ -46,16 +47,10 @@ public class StudentCardController implements Initializable {
         birthday.setText("birthday: " + getStudent.getBirthday() + ", age: " + getStudent.getAge());
         imageView.setImage(getStudent.getImage());
         listOfStudents.getItems().addAll(studentList);
-                }
+    }
 
 
-     public void particularStudent(){
-        listOfStudents.setItems(studentList);
-        listOfStudents.setOnMouseClicked(event -> {
-            int lol = listOfStudents.getSelectionModel().getSelectedIndex();
-            studentList.get(lol);
-        });
-}
+
 
     /**
      * @param actionEvent- when list of activities button is pressed it will help
@@ -85,4 +80,14 @@ public class StudentCardController implements Initializable {
        window.setScene(activitiesScene);
        window.show();
    }
+
+    public void particularStudent(MouseEvent mouseEvent) {
+       Student par = studentList.get(listOfStudents.getSelectionModel().getSelectedIndex());
+        firstName.setText(String.format("First Name : %10s", par.getFirstName()));
+        lastName.setText(String.format("Last Name : %10s", par.getLastName()));
+        studentNumber.setText(String.format("Student#%10d", par.getNewStudentNumber()));
+        listActivities.setText(String.format("%s", par.getFavActivitiesString()));
+        birthday.setText("birthday: " + par.getBirthday() + ", age: " + par.getAge());
+        imageView.setImage(par.getImage());
+    }
 }
