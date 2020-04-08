@@ -28,23 +28,34 @@ public class StudentCardController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        studentList = FXCollections.observableArrayList();
     }
 
-    public void intData(Student student){
+    public void intDatas(Student student){
         getStudent = student;
+    }
+
+    public void intData(ObservableList<Student> studentLists){
+        studentList = FXCollections.observableArrayList();
+        studentList = studentLists;
+        int lastStudent = (studentLists.size()-1);
+        getStudent = studentLists.get(lastStudent);
         firstName.setText(String.format("First Name : %10s", getStudent.getFirstName()));
         lastName.setText(String.format("Last Name : %10s", getStudent.getLastName()));
-        studentNumber.setText(String.format("Student#%10d", student.getNewStudentNumber()));
-        listActivities.setText(String.format("%s",getStudent.getFavActivitiesString()));
-        birthday.setText("birthday: "+getStudent.getBirthday()+", age: "+getStudent.getAge());
+        studentNumber.setText(String.format("Student#%10d", getStudent.getNewStudentNumber()));
+        listActivities.setText(String.format("%s", getStudent.getFavActivitiesString()));
+        birthday.setText("birthday: " + getStudent.getBirthday() + ", age: " + getStudent.getAge());
         imageView.setImage(getStudent.getImage());
-        addingStudent();
-    }
-    public void addingStudent(){
-        studentList.add(getStudent);
         listOfStudents.getItems().addAll(studentList);
-    }
+                }
+
+
+     public void particularStudent(){
+        listOfStudents.setItems(studentList);
+        listOfStudents.setOnMouseClicked(event -> {
+            int lol = listOfStudents.getSelectionModel().getSelectedIndex();
+            studentList.get(lol);
+        });
+}
 
     /**
      * @param actionEvent- when list of activities button is pressed it will help
@@ -69,6 +80,7 @@ public class StudentCardController implements Initializable {
        Parent activitiesView = loader.load();
        Scene activitiesScene = new Scene(activitiesView);
        NewStudentViewController controller = loader.getController();
+       controller.intData(studentList);
        Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
        window.setScene(activitiesScene);
        window.show();

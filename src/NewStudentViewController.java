@@ -1,3 +1,5 @@
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -38,6 +40,7 @@ public class NewStudentViewController implements Initializable {
     @FXML private Label ageLabel;
     @FXML private DatePicker birthday;
     private Student newStudent;
+    private ObservableList<Student> studentList;
 
     /**
      *this will set initial image and set some labels values null and
@@ -45,6 +48,7 @@ public class NewStudentViewController implements Initializable {
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+    studentList  = FXCollections.observableArrayList();
         studentNumber.setEditable(false);
         try {
             File imageFile = new File("./src/Image/defaultPerson.png");
@@ -61,6 +65,10 @@ public class NewStudentViewController implements Initializable {
         studentNumber.setText(String.valueOf(Student.getStudentNumber()));
     }
 
+    public void intData(ObservableList<Student> studentLists){
+        studentList = studentLists;
+    }
+
     /**
      * this method will try to create a student object using the data entered by user
      * @param actionEvent
@@ -68,16 +76,19 @@ public class NewStudentViewController implements Initializable {
     public void submit(ActionEvent actionEvent) {
         if(checkFields()) {
             try {
+
                 newStudent = new Student(firstName.getText(), lastName.getText(),birthday.getValue(),selectImage.getImage());
                 newStudent.setBirthday(birthday.getValue());
                 activities();
                 viewStudent.setVisible(true);
-                System.out.println("new student: " + newStudent);
+               // System.out.println("new student: " + newStudent);
+                studentList.add(newStudent);
             } catch (IllegalArgumentException e){
                 errorDisplay.setText(e.getMessage());
             }
         }
     }
+
 
     /**
      * @param event- when user does an action on datePicker this method will help to set age
@@ -180,7 +191,9 @@ public class NewStudentViewController implements Initializable {
         Parent activitiesView = loader.load();
         Scene activitiesScene = new Scene(activitiesView);
         StudentCardController controller = loader.getController();
-        controller.intData(newStudent);
+        controller.intDatas(newStudent);
+        controller.intData(studentList);
+
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(activitiesScene);
         window.setTitle("View Student");

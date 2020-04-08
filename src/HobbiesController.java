@@ -112,7 +112,7 @@ public class HobbiesController implements Initializable {
         Parent activitiesView = loader.load();
         Scene activitiesScene = new Scene(activitiesView);
         StudentCardController controller = loader.getController();
-        controller.intData(selectedStudent);
+      //  controller.intData(selectedStudent);
         Stage window = (Stage) ((Node) actionEvent.getSource()).getScene().getWindow();
         window.setScene(activitiesScene);
         window.show();
