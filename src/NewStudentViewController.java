@@ -76,12 +76,10 @@ public class NewStudentViewController implements Initializable {
     public void submit(ActionEvent actionEvent) {
         if(checkFields()) {
             try {
-
                 newStudent = new Student(firstName.getText(), lastName.getText(),birthday.getValue(),selectImage.getImage());
-                newStudent.setBirthday(birthday.getValue());
                 activities();
                 viewStudent.setVisible(true);
-               // System.out.println("new student: " + newStudent);
+                System.out.println("new student: " + newStudent);
                 studentList.add(newStudent);
             } catch (IllegalArgumentException e){
                 errorDisplay.setText(e.getMessage());
@@ -116,9 +114,9 @@ public class NewStudentViewController implements Initializable {
             if (message.isEmpty())
                 message = "please select your birthday";
             else if (firstName.getText().isEmpty()&& !lastName.getText().isEmpty())
-                message = "First name and Student number required";
+                message = "First name and birthday required";
             else if (!firstName.getText().isEmpty() && lastName.getText().isEmpty())
-                message = "Last name and Student number required";
+                message = "Last name and birthday required";
             else
                 message = "all fields are required";
         }
@@ -193,12 +191,12 @@ public class NewStudentViewController implements Initializable {
         StudentCardController controller = loader.getController();
         controller.intDatas(newStudent);
         controller.intData(studentList);
-
         Stage window = (Stage)((Node)actionEvent.getSource()).getScene().getWindow();
         window.setScene(activitiesScene);
         window.setTitle("View Student");
         window.show();
     }
+
 
     /**
      * @param event this method will help to set initial values required by student object

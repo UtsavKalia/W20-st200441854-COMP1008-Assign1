@@ -18,10 +18,19 @@ public class Student {
     public Student(String firstName, String lastName, LocalDate birthday, Image image) {
         setFirstName(firstName);
         setLastName(lastName);
-        newStudentNumber = setStudentNumber(studentNumber);
         favouriteActivities = new ArrayList<>();
         setImage(image);
         setBirthday(birthday);
+        newStudentNumber = setStudentNumber(studentNumber);
+    }
+
+    public Student(String firstName, String lastName, LocalDate birthday) {
+        setFirstName(firstName);
+        setLastName(lastName);
+        favouriteActivities = new ArrayList<>();
+        setImage(image);
+        setBirthday(birthday);
+        newStudentNumber = setStudentNumber(studentNumber);
     }
     public String getFirstName() {
         return firstName;
@@ -56,30 +65,6 @@ public class Student {
             throw new IllegalArgumentException("last name must be greater than 2 character");
     }
 
-    public static int getStudentNumber() {
-        return studentNumber;
-    }
-    /**
-     * @param studentNumber-this method will make sure that student number contain 9 numbers otherwise
-     *                     it will throw an illegal argument exception
-     * @return
-     */
-    private int setStudentNumber(int studentNumber) {
-        if (Integer.toString(studentNumber).length() == 9) {
-            this.newStudentNumber = studentNumber;
-            studentNumber = Student.studentNumber++;
-        }
-        else
-            throw new IllegalArgumentException("student number length must be 9 ");
-        return studentNumber;
-    }
-    public int getNewStudentNumber() {
-        return newStudentNumber;
-    }
-
-    public LocalDate getBirthday(){
-        return birthday;
-    }
     /**
      * @param birthday- this method will help user to set birthday if its difference with current year is between 10 to 120
      */
@@ -87,10 +72,12 @@ public class Student {
         if (Period.between(birthday, LocalDate.now()).getYears()>=10 && Period.between(birthday, LocalDate.now()).getYears()<120){
             this.birthday = birthday;
         }
-            else
-                throw new IllegalArgumentException("no");
+        else
+            throw new IllegalArgumentException("your age must be between 10-120 if you want to be student");
     }
-
+    public LocalDate getBirthday(){
+        return birthday;
+    }
     /**
      * @return- this method will calculate current age of user and return it  as a string.
      */
@@ -126,6 +113,28 @@ public class Student {
     public void setImage(Image image){
         this.image =image;
     }
+
+    public static int getStudentNumber() {
+        return studentNumber;
+    }
+    /**
+     * @param studentNumber-this method will make sure that student number contain 9 numbers otherwise
+     *                     it will throw an illegal argument exception
+     * @return
+     */
+    private int setStudentNumber(int studentNumber) {
+        if (Integer.toString(studentNumber).length() == 9) {
+            this.newStudentNumber = studentNumber;
+            studentNumber = Student.studentNumber++;
+        }
+        else
+            throw new IllegalArgumentException("student number length must be 9 ");
+        return studentNumber;
+    }
+    public int getNewStudentNumber() {
+        return newStudentNumber;
+    }
+
 
     /**
      * @return- this method will help to use Student object in console using toString method

@@ -55,7 +55,7 @@
             </VBox>
          </children>
       </HBox>
-      <ListView fx:id="listOfStudents" layoutX="9.0" layoutY="395.0" prefHeight="96.0" prefWidth="508.0" />
+      <ListView fx:id="listOfStudents" layoutX="9.0" layoutY="395.0" onMouseClicked="#particularStudent" prefHeight="96.0" prefWidth="508.0" />
       
 
    </children>
