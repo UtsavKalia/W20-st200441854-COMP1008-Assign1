@@ -123,11 +123,6 @@
                                 <Font size="15.0" />
                             </font>
                         </Button>
-                        <Button fx:id="viewStudent" mnemonicParsing="false" onAction="#viewStudent" text="View Student">
-                            <font>
-                                <Font size="15.0" />
-                            </font>
-                        </Button>
                     </children>
                 </HBox>
             </children>

@@ -8,6 +8,12 @@ public class Main extends Application {
     public static void main(String args[]){
         launch(args);
     }
+
+    /**
+     * this method will launch the Scene named Create Student which is in NewStudentView.fxml
+     * @param primaryStage
+     * @throws Exception
+     */
     @Override
     public void start(Stage primaryStage) throws Exception {
         Parent root = FXMLLoader.load(getClass().getResource("NewStudentView.fxml"));

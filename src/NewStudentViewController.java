@@ -23,7 +23,6 @@ import java.time.Period;
 import java.util.ResourceBundle;
 
 public class NewStudentViewController implements Initializable {
-    @FXML private Button viewStudent;
     @FXML private TextField firstName;
     @FXML private TextField lastName;
     @FXML private TextField studentNumber;
@@ -43,12 +42,13 @@ public class NewStudentViewController implements Initializable {
     private ObservableList<Student> studentList;
 
     /**
-     *this will set initial image and set some labels values null and
-     * helps to set button viewStudent invisible
+     *this will set initial image, set some labels values null,
+     * helps to set button viewStudent invisible and initialize the list named
+     * studentList to contain student
      */
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-    studentList  = FXCollections.observableArrayList();
+        studentList  = FXCollections.observableArrayList();
         studentNumber.setEditable(false);
         try {
             File imageFile = new File("./src/Image/defaultPerson.png");
@@ -61,7 +61,6 @@ public class NewStudentViewController implements Initializable {
         }
         errorDisplay.setText("");
         ageLabel.setText("");
-        viewStudent.setVisible(false);
         studentNumber.setText(String.valueOf(Student.getStudentNumber()));
     }
 
@@ -78,15 +77,14 @@ public class NewStudentViewController implements Initializable {
             try {
                 newStudent = new Student(firstName.getText(), lastName.getText(),birthday.getValue(),selectImage.getImage());
                 activities();
-                viewStudent.setVisible(true);
                 System.out.println("new student: " + newStudent);
                 studentList.add(newStudent);
-            } catch (IllegalArgumentException e){
+                viewStudent(actionEvent);
+            } catch (IllegalArgumentException | IOException e){
                 errorDisplay.setText(e.getMessage());
             }
         }
     }
-
 
     /**
      * @param event- when user does an action on datePicker this method will help to set age
@@ -196,7 +194,6 @@ public class NewStudentViewController implements Initializable {
         window.setTitle("View Student");
         window.show();
     }
-
 
     /**
      * @param event this method will help to set initial values required by student object

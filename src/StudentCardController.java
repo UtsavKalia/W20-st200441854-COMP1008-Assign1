@@ -49,9 +49,6 @@ public class StudentCardController implements Initializable {
         listOfStudents.getItems().addAll(studentList);
     }
 
-
-
-
     /**
      * @param actionEvent- when list of activities button is pressed it will help
      *                   to go to second controller named Hobbies.fxml.

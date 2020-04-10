@@ -3,7 +3,7 @@ import java.time.LocalDate;
 import java.time.Period;
 import java.util.ArrayList;
 /*
- * Firstly we are going to create instance variables for student class
+ * Firstly we are going to create instance variables of Student
 */
 public class Student {
     private String firstName, lastName;
@@ -12,6 +12,7 @@ public class Student {
     private Image image;
     private ArrayList<String> favouriteActivities;
     private LocalDate birthday;
+
     /**
      *  constructor will create the object in the system
      */
@@ -24,6 +25,9 @@ public class Student {
         newStudentNumber = setStudentNumber(studentNumber);
     }
 
+    /**
+     * Constructor will create the object in the system and we can have multiple constructors in one class
+     */
     public Student(String firstName, String lastName, LocalDate birthday) {
         setFirstName(firstName);
         setLastName(lastName);
@@ -32,9 +36,11 @@ public class Student {
         setBirthday(birthday);
         newStudentNumber = setStudentNumber(studentNumber);
     }
+
     public String getFirstName() {
         return firstName;
     }
+
     /**
      * @param firstName- this method will make sure that firstName is greater than 2 characters and if user
      *                 enter all letters in small it will convert 1st character to uppercase
@@ -75,9 +81,11 @@ public class Student {
         else
             throw new IllegalArgumentException("your age must be between 10-120 if you want to be student");
     }
+
     public LocalDate getBirthday(){
         return birthday;
     }
+
     /**
      * @return- this method will calculate current age of user and return it  as a string.
      */
@@ -117,6 +125,7 @@ public class Student {
     public static int getStudentNumber() {
         return studentNumber;
     }
+
     /**
      * @param studentNumber-this method will make sure that student number contain 9 numbers otherwise
      *                     it will throw an illegal argument exception
@@ -134,7 +143,6 @@ public class Student {
     public int getNewStudentNumber() {
         return newStudentNumber;
     }
-
 
     /**
      * @return- this method will help to use Student object in console using toString method
