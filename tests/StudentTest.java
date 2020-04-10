@@ -1,25 +1,38 @@
 import javafx.scene.input.DataFormat;
 import org.junit.Before;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 import static org.junit.Assert.*;
-
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class StudentTest {
     private Student student1;
     private Student student2;
 
+    /**
+     * before is run each time before test
+     * @throws Exception
+     */
     @Before
     public void setUp() throws Exception{
         student1 =new Student("utsav","kalia", LocalDate.of(2001,1,1));
         student2=new Student("varun","sood",LocalDate.of(2000,12,18));
     }
 
-
+    @Test
+    public void aTestToString() {
+        String stu = "Utsav Kalia, student# 100000001";
+        assertEquals(stu,student1.toString());
+        String stud = "Varun Sood, student# 100000002";
+        assertEquals(stud,student2.toString());
+    }
     @Test
     public void setFirstName() {
+
         student1.setFirstName("piyush");
         assertEquals("Piyush",student1.getFirstName());
         student2.setFirstName("Sushant");
@@ -73,7 +86,6 @@ public class StudentTest {
     public void getNewStudentNumber() {
 
     }
-
     @Test
     public void getBirthday() {
         assertEquals(LocalDate.of(2001,1,1),student1.getBirthday());
@@ -95,7 +107,9 @@ public class StudentTest {
     }
 
     @Test
-    public void addActivity() {
+    public void zaddActivity() {
+        student1.addActivity("dancing");
+        assertEquals("dancing\r\n",student1.getFavActivitiesString());
     }
 
     @Test
@@ -106,7 +120,6 @@ public class StudentTest {
         hey.add("dancing");
         hey.add("playing");
         assertEquals(hey,student1.getFavouriteActivities());
-
         student2.addActivity("dancing");
         student2.addActivity("playing");
         ArrayList<String> heyy = new ArrayList<>();
@@ -124,17 +137,4 @@ public class StudentTest {
         student2.addActivity("music");
         assertEquals("dancing\r\nmusic\r\n",student2.getFavActivitiesString());
     }
-
-    @Test
-    public void testToStringStudent1() {
-        String stu = "Utsav Kalia, student# 100000001";
-        assertEquals(stu,student1.toString());
-    }
-    @Test
-    public void testToStringStudent2() {
-        String stu = "Varun Sood, student# 100000002";
-        assertEquals(stu,student2.toString());
-    }
-
-
 }
